@@ -1,0 +1,10 @@
+{
+  "name":"RewardLoop",
+  "short_name":"RewardLoop",
+  "start_url":".",
+  "display":"standalone",
+  "background_color":"#f5f7fb",
+  "theme_color":"#111827",
+  "description":"RewardLoop rewards app prototype",
+  "icons":[]
+}
