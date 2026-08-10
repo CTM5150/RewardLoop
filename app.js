@@ -479,74 +479,50 @@ function accountScreen() {
 
 /* ---------------- ACTIONS ---------------- */
 
-function handleAction(event) {
-  const action = event.currentTarget.dataset.action;
+function handleAction(action) {
+  if (action === "daily") {
+    if (state.dailyClaimed) {
+      alert("🔥 Daily reward already claimed!");
+      return;
+    }
 
-  if (action === "earn") {
-    state.screen = "earn";
+    state.points += 1000;
+    state.today += 1;
+    state.lifetime = state.points;
+    state.dailyClaimed = true;
+
+    state.tx.unshift([
+      "Daily challenge completed",
+      1000
+    ]);
+
+    save();
+    render();
+
+    alert("🎉 Daily reward claimed! You earned 1,000 points.");
+    return;
   }
 
-  if (action === "complete") {
+  if (action === "demo") {
     state.points += 250;
-    state.today += 250;
-    state.lifetime += 250;
-    state.completedActivities += 1;
-
-    if (state.points >= 1000) {
-      state.achievements.thousandPoints = true;
-    }
-
-    if (state.completedActivities >= 5) {
-      state.achievements.fiveActivities = true;
-    }
-
-    state.achievements.firstReward = true;
+    state.today += 0.25;
+    state.lifetime = state.points;
 
     state.tx.unshift([
       "Demo activity completed",
       250
     ]);
 
-    alert("Great! You earned 250 demo points.");
+    save();
+    render();
+
+    alert("🎁 Demo activity completed! You earned 250 points.");
+    return;
   }
 
-  if (action === "daily") {
-    if (state.dailyClaimed) {
-      alert("You already claimed today's demo bonus.");
-      return;
-    }
-
-    state.points += 100;
-    state.today += 100;
-    state.lifetime += 100;
-    state.dailyClaimed = true;
-
-    state.tx.unshift([
-      "Daily demo bonus",
-      100
-    ]);
-
-    alert("Daily bonus claimed! +100 demo points.");
+  if (action === "cashout") {
+    alert("💰 Cash-out is currently a prototype feature. No real money is transferred.");
+    return;
   }
-
-  if (action === "support") {
-    alert(
-      "Thank you for supporting RewardLoop! ❤️\n\n" +
-      "We'll add the official support/donation page here later."
-    );
-  }
-
-  if (action === "reset") {
-    if (confirm("Reset all demo data?")) {
-      state = {
-        ...defaultState,
-        tx: [...defaultState.tx]
-      };
-    }
-  }
-
-  save();
-  render();
 }
-
 render();
