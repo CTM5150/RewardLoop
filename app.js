@@ -297,11 +297,13 @@ function walletScreen() {
   return `
     <h2>Your Wallet</h2>
 
+    <p class="sub">
+      Track your available rewards, pending earnings, and activity.
+    </p>
+
     <div class="balance">
-      <div class="label">AVAILABLE</div>
-
+      <div class="label">AVAILABLE BALANCE</div>
       <div class="amount">${money(state.points)}</div>
-
       <div class="pending">
         ${money(state.pending)} pending
       </div>
@@ -320,6 +322,56 @@ function walletScreen() {
     </div>
 
     <div class="section">
+      <b>💵 Cash Out</b>
+    </div>
+
+    <div class="card">
+      <div class="row">
+        <div>
+          <b>Available to withdraw</b>
+          <p class="sub">
+            Your current available demo balance.
+          </p>
+        </div>
+
+        <strong class="reward">
+          ${money(state.points)}
+        </strong>
+      </div>
+
+      <div class="payout-options">
+
+        <div class="payout-option">
+          <div class="payout-icon">P</div>
+          <div>
+            <b>PayPal</b>
+            <small>Demo payout method</small>
+          </div>
+          <span>›</span>
+        </div>
+
+        <div class="payout-option">
+          <div class="payout-icon">🎁</div>
+          <div>
+            <b>Gift Card</b>
+            <small>Demo payout method</small>
+          </div>
+          <span>›</span>
+        </div>
+
+      </div>
+
+      <button class="btn blue full" disabled>
+        Request Cash Out
+      </button>
+
+      <p class="sub cashout-note">
+        Cash-out is currently a prototype feature.
+        No real money is transferred.
+      </p>
+    </div>
+
+    <div class="section">
       <b>Recent activity</b>
     </div>
 
@@ -330,6 +382,7 @@ function walletScreen() {
           : state.tx.map(transaction => `
               <div class="tx row">
                 <span>${transaction[0]}</span>
+
                 <span class="reward">
                   ${transaction[1] > 0 ? "+" : ""}
                   ${points(transaction[1])}
@@ -341,8 +394,8 @@ function walletScreen() {
 
     <div class="notice">
       <b>Demo wallet</b><br>
-      These balances are for testing only. No real money is stored
-      or transferred by this prototype.
+      These balances are for testing only. No real money is stored,
+      transferred, or available for withdrawal in this prototype.
     </div>
   `;
 }
