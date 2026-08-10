@@ -486,20 +486,20 @@ function handleAction(action) {
       return;
     }
 
-    state.points += 1000;
+    state.points += 100;
     state.today += 1;
     state.lifetime = state.points;
     state.dailyClaimed = true;
 
     state.tx.unshift([
       "Daily challenge completed",
-      1000
+      100
     ]);
 
     save();
     render();
 
-    alert("🎉 Daily reward claimed! You earned 1,000 points.");
+    alert("🎉 Daily reward claimed! You earned 100 points.");
     return;
   }
 
