@@ -80,7 +80,7 @@ function setupButtons() {
   });
 
   document.querySelectorAll("[data-action]").forEach(button => {
-    button.onclick = handleAction;
+    button.onclick = () => handleAction(button.dataset.action);
   });
 }
 
