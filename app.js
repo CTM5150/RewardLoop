@@ -7,6 +7,14 @@ const defaultState = {
   today: 1240,
   lifetime: 7420,
   dailyClaimed: false,
+  streak: 1,
+  completedActivities: 0,
+  achievements: {
+    firstReward: true,
+    thousandPoints: true,
+    fiveActivities: false,
+    sevenDayStreak: false
+  },
   tx: [
     ["Demo offer completed", 1250],
     ["Demo offer completed", 500],
@@ -14,7 +22,18 @@ const defaultState = {
   ]
 };
 
-let state = JSON.parse(localStorage.getItem(STORAGE_KEY)) || defaultState;
+const savedState = JSON.parse(localStorage.getItem(STORAGE_KEY));
+
+let state = savedState
+  ? {
+      ...defaultState,
+      ...savedState,
+      achievements: {
+        ...defaultState.achievements,
+        ...(savedState.achievements || {})
+      }
+    }
+  : { ...defaultState };;
 
 function save() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
@@ -145,19 +164,51 @@ function homeScreen() {
 /* ---------------- EARN ---------------- */
 
 function earnScreen() {
+  const achievementCount =
+    Object.values(state.achievements).filter(Boolean).length;
+
   return `
     <h2>Earn Rewards</h2>
 
     <p class="sub">
-      Complete activities to test how the RewardLoop earning system works.
+      Complete activities, build your streak, and unlock achievements.
     </p>
 
-    <div class="card offer">
+    <div class="stats">
+      <div class="stat">
+        <span>🔥 STREAK</span>
+        <b>${state.streak} day${state.streak === 1 ? "" : "s"}</b>
+      </div>
+
+      <div class="stat">
+        <span>🏆 ACHIEVEMENTS</span>
+        <b>${achievementCount}/4</b>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="row">
+        <div>
+          <b>🔥 Daily Challenge</b>
+          <p class="sub">
+            Claim your daily reward and keep your streak alive.
+          </p>
+        </div>
+
+        ${
+          state.dailyClaimed
+            ? `<span class="pill">CLAIMED</span>`
+            : `<button class="btn blue" data-action="daily">+100</button>`
+        }
+      </div>
+    </div>
+
+    <div class="card offer" style="margin-top:12px;">
       <div class="icon">🎁</div>
 
       <div class="offermain">
         <b>Demo Activity</b>
-        <p>Complete this activity to test rewards.</p>
+        <p>Complete this activity and receive demo points.</p>
         <span class="reward">+250 pts</span>
       </div>
 
@@ -166,48 +217,76 @@ function earnScreen() {
       </button>
     </div>
 
-    <div class="card offer" style="margin-top:12px;">
-      <div class="icon">📋</div>
+    <div class="card" style="margin-top:12px;">
+      <b>📈 Your Progress</b>
 
-      <div class="offermain">
-        <b>Surveys</b>
-        <p>Reward surveys will be added later.</p>
+      <p class="sub">
+        ${state.completedActivities} of 5 activities completed
+      </p>
+
+      <div class="progress">
+        <div
+          class="progress-bar"
+          style="width:${Math.min(
+            state.completedActivities * 20,
+            100
+          )}%"
+        ></div>
       </div>
-
-      <span class="pill">SOON</span>
     </div>
 
-    <div class="card offer" style="margin-top:12px;">
-      <div class="icon">🎮</div>
-
-      <div class="offermain">
-        <b>Games & Activities</b>
-        <p>More ways to earn are coming.</p>
-      </div>
-
-      <span class="pill">SOON</span>
+    <div class="section">
+      <b>🏆 Achievements</b>
     </div>
 
-    <div class="card offer" style="margin-top:12px;">
-      <div class="icon">🎯</div>
-
-      <div class="offermain">
-        <b>Daily Challenge</b>
-        <p>Complete one challenge every day.</p>
+    <div class="card">
+      <div class="row">
+        <span>⭐ First Reward</span>
+        ${
+          state.achievements.firstReward
+            ? `<span class="pill">UNLOCKED</span>`
+            : `<span>🔒</span>`
+        }
       </div>
 
-      ${
-        state.dailyClaimed
-          ? `<span class="pill">DONE</span>`
-          : `<button class="btn blue" data-action="daily">Claim</button>`
-      }
+      <hr>
+
+      <div class="row">
+        <span>💰 Earn 1,000 Points</span>
+        ${
+          state.achievements.thousandPoints
+            ? `<span class="pill">UNLOCKED</span>`
+            : `<span>🔒</span>`
+        }
+      </div>
+
+      <hr>
+
+      <div class="row">
+        <span>🎯 Complete 5 Activities</span>
+        ${
+          state.achievements.fiveActivities
+            ? `<span class="pill">UNLOCKED</span>`
+            : `<span>🔒</span>`
+        }
+      </div>
+
+      <hr>
+
+      <div class="row">
+        <span>🔥 7 Day Streak</span>
+        ${
+          state.achievements.sevenDayStreak
+            ? `<span class="pill">UNLOCKED</span>`
+            : `<span>🔒</span>`
+        }
+      </div>
     </div>
 
     <div class="notice">
-      <b>Coming later:</b><br>
-      Real reward partners can only be connected after we build
-      secure accounts, server-side tracking, fraud protection,
-      and a legitimate payout system.
+      <b>Demo rewards only</b><br>
+      RewardLoop currently uses demonstration points.
+      There are no advertisements, purchases, or real-money payouts.
     </div>
   `;
 }
@@ -358,6 +437,17 @@ function handleAction(event) {
     state.points += 250;
     state.today += 250;
     state.lifetime += 250;
+    state.completedActivities += 1;
+
+    if (state.points >= 1000) {
+      state.achievements.thousandPoints = true;
+    }
+
+    if (state.completedActivities >= 5) {
+      state.achievements.fiveActivities = true;
+    }
+
+    state.achievements.firstReward = true;
 
     state.tx.unshift([
       "Demo activity completed",
