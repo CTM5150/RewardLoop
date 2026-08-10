@@ -1,0 +1,28 @@
+:root{
+  --bg:#f5f7fb;--card:#fff;--text:#111827;--muted:#6b7280;--accent:#2563eb;
+  --border:#e5e7eb;--success:#16803c;--shadow:0 8px 30px rgba(17,24,39,.08)
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input{font:inherit}
+#app{min-height:100vh;padding-bottom:78px}
+#screen{max-width:620px;margin:auto;padding:22px 18px}
+h1{font-size:30px;margin:6px 0 22px} h2{font-size:25px;margin:6px 0 18px}
+.muted{color:var(--muted)} .small{font-size:13px}
+.balance-card{background:var(--card);border:1px solid var(--border);border-radius:22px;padding:24px;box-shadow:var(--shadow)}
+.balance-label{font-size:13px;color:var(--muted);font-weight:700;letter-spacing:.08em}
+.balance{font-size:44px;font-weight:800;margin:4px 0}
+.row{display:flex;justify-content:space-between;gap:12px;align-items:center}
+.btn{border:0;border-radius:14px;padding:14px 18px;font-weight:750;cursor:pointer}
+.primary{background:var(--accent);color:white}.secondary{background:#eef2ff;color:#1e40af}
+.full{width:100%}
+.spacer{height:18px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:18px;margin:12px 0}
+.offer-title{font-size:18px;font-weight:750}.reward{color:var(--success);font-weight:800}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;height:72px;background:rgba(255,255,255,.96);border-top:1px solid var(--border);display:flex;justify-content:center;gap:2px;z-index:10;padding-bottom:env(safe-area-inset-bottom)}
+.bottom-nav button{flex:1;max-width:150px;border:0;background:transparent;color:var(--muted);font-size:21px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer}
+.bottom-nav button span{font-size:11px}.bottom-nav button.active{color:var(--accent);font-weight:800}
+input{width:100%;padding:14px;border:1px solid #d1d5db;border-radius:12px;margin:8px 0 14px;background:white}
+.notice{background:#fff7ed;border:1px solid #fed7aa;border-radius:14px;padding:13px;font-size:13px}
+.tx{padding:13px 0;border-bottom:1px solid var(--border)}
+.tx:last-child{border-bottom:0}
