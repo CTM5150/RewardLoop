@@ -1,1 +1,485 @@
-:root{--navy:#0b1220;--blue:#4f7cff;--bg:#f4f7fb;--card:#fff;--text:#111827;--muted:#718096;--line:#e7ebf2;--green:#17a673;--shadow:0 10px 28px rgba(24,39,75,.08)}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,sans-serif}.app{min-height:100vh;padding-bottom:82px}header{height:76px;background:var(--navy);color:white;display:flex;align-items:center;justify-content:space-between;padding:0 20px}.brand{display:flex;gap:11px;align-items:center}.logo{width:39px;height:39px;border-radius:12px;background:linear-gradient(135deg,#6f91ff,#315ce6);display:grid;place-items:center;font-weight:800;font-size:20px}.brand b{display:block}.brand small{display:block;color:#aeb9ce;font-size:10px;margin-top:2px}.profile{border:0;background:#18243a;color:white;width:38px;height:38px;border-radius:12px}#screen{max-width:640px;margin:auto;padding:22px 18px}h1{font-size:27px;margin:4px 0 5px}h2{font-size:25px;margin:4px 0 18px}.sub{color:var(--muted);font-size:13px;line-height:1.55}.balance{background:linear-gradient(135deg,#315ce6,#5c83ff);color:white;border-radius:25px;padding:23px;box-shadow:0 16px 35px rgba(49,92,230,.25);margin-top:20px}.label{font-size:11px;letter-spacing:.12em;font-weight:700;opacity:.78}.amount{font-size:43px;font-weight:800;margin:5px 0}.pending{font-size:12px;opacity:.8}.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}.stat,.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:var(--shadow)}.stat span{font-size:11px;color:var(--muted)}.stat b{display:block;font-size:19px;margin-top:5px}.row{display:flex;justify-content:space-between;align-items:center;gap:12px}.btn{border:0;border-radius:13px;padding:13px 16px;font-weight:700}.blue{background:var(--blue);color:white}.white{background:white;color:#2854d5}.full{width:100%}.offer{display:flex;gap:13px;align-items:center}.icon{width:48px;height:48px;border-radius:15px;background:#edf2ff;display:grid;place-items:center;font-size:22px}.offermain{flex:1}.offermain b{font-size:14px}.offermain p{margin:4px 0;color:var(--muted);font-size:11px}.reward{color:var(--green);font-weight:800;font-size:12px}.pill{background:#edf8f3;color:#13825d;border-radius:999px;padding:5px 8px;font-size:10px;font-weight:700}.notice{background:#eef4ff;border:1px solid #d8e4ff;color:#3155a8;border-radius:15px;padding:12px;font-size:11px;line-height:1.5;margin-top:14px}.section{display:flex;justify-content:space-between;align-items:center;margin:22px 0 10px}.navlink{color:var(--blue);font-size:12px;font-weight:700}.tx{padding:13px 0;border-bottom:1px solid var(--line);font-size:12px}.tx:last-child{border-bottom:0}input{width:100%;border:1px solid #d7ddea;border-radius:12px;padding:13px;background:white;margin:7px 0 12px}label{font-size:11px;color:var(--muted)}.back{border:0;background:none;color:var(--blue);font-weight:700;padding:0;margin-bottom:10px}hr{border:0;border-top:1px solid var(--line);margin:14px 0}#nav{position:fixed;left:0;right:0;bottom:0;height:78px;background:rgba(255,255,255,.97);border-top:1px solid var(--line);display:flex;justify-content:center;z-index:10;padding-bottom:env(safe-area-inset-bottom)}#nav button{flex:1;max-width:150px;border:0;background:none;color:#8a94a6;font-size:21px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}#nav button span{font-size:10px}#nav button.active{color:var(--blue);font-weight:800}
+/* ================================
+   RewardLoop — Mobile UI
+   ================================ */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #f4f7fc;
+  color: #172033;
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+/* ================================
+   App Header
+   ================================ */
+
+header {
+  background: #0b1426;
+  color: white;
+  padding: 20px 20px 22px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+header p {
+  margin: 4px 0 0;
+  color: #aeb9ca;
+  font-size: 14px;
+}
+
+/* ================================
+   Main Content
+   ================================ */
+
+main,
+#screen {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+#screen {
+  padding: 28px 18px 120px;
+}
+
+h1 {
+  margin: 0 0 10px;
+  font-size: 38px;
+  line-height: 1.1;
+  letter-spacing: -1px;
+}
+
+h2 {
+  margin: 0 0 10px;
+  font-size: 30px;
+  letter-spacing: -0.6px;
+}
+
+h3 {
+  margin: 0;
+}
+
+.sub {
+  color: #718096;
+  font-size: 16px;
+  line-height: 1.55;
+  margin: 8px 0 20px;
+}
+
+/* ================================
+   Balance Card
+   ================================ */
+
+.balance {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #315be8, #587df5);
+  color: white;
+  border-radius: 28px;
+  padding: 30px 26px;
+  margin: 24px 0;
+  box-shadow: 0 18px 40px rgba(49, 91, 232, 0.22);
+}
+
+.balance::after {
+  content: "";
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  right: -80px;
+  top: -80px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.label {
+  position: relative;
+  z-index: 1;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  opacity: 0.85;
+}
+
+.amount {
+  position: relative;
+  z-index: 1;
+  margin: 8px 0;
+  font-size: 48px;
+  line-height: 1;
+  font-weight: 850;
+  letter-spacing: -2px;
+}
+
+.pending {
+  position: relative;
+  z-index: 1;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 15px;
+}
+
+/* ================================
+   Buttons
+   ================================ */
+
+.btn {
+  border: 0;
+  border-radius: 16px;
+  padding: 13px 18px;
+  font-weight: 800;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.btn:hover {
+  opacity: 0.92;
+}
+
+.btn.blue {
+  background: #4169e8;
+  color: white;
+  box-shadow: 0 7px 18px rgba(65, 105, 232, 0.22);
+}
+
+.btn.white {
+  background: white;
+  color: #3159c9;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.btn.full {
+  width: 100%;
+}
+
+.balance .btn {
+  position: relative;
+  z-index: 2;
+  margin-top: 8px;
+}
+
+/* ================================
+   Stats
+   ================================ */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 18px 0 28px;
+}
+
+.stat {
+  background: white;
+  border: 1px solid #e6eaf1;
+  border-radius: 22px;
+  padding: 20px;
+  box-shadow: 0 7px 22px rgba(23, 32, 51, 0.05);
+}
+
+.stat span {
+  display: block;
+  color: #7b8799;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.7px;
+  margin-bottom: 8px;
+}
+
+.stat b {
+  font-size: 24px;
+}
+
+/* ================================
+   Section Headings
+   ================================ */
+
+.section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 28px 0 12px;
+  font-size: 20px;
+}
+
+.navlink {
+  color: #4169e8;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+/* ================================
+   Cards
+   ================================ */
+
+.card {
+  background: white;
+  border: 1px solid #e5e9f0;
+  border-radius: 22px;
+  padding: 20px;
+  box-shadow: 0 8px 25px rgba(23, 32, 51, 0.05);
+}
+
+.offer {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.icon {
+  flex: 0 0 auto;
+  width: 52px;
+  height: 52px;
+  border-radius: 17px;
+  display: grid;
+  place-items: center;
+  background: #edf2ff;
+  font-size: 25px;
+}
+
+.offermain {
+  flex: 1;
+  min-width: 0;
+}
+
+.offermain b {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.offermain p {
+  margin: 0 0 7px;
+  color: #7a8597;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.reward {
+  color: #159a72;
+  font-weight: 850;
+  white-space: nowrap;
+}
+
+.pill {
+  display: inline-block;
+  padding: 6px 9px;
+  border-radius: 999px;
+  background: #e9f8f2;
+  color: #158463;
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+/* ================================
+   Rows
+   ================================ */
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid #edf0f4;
+  margin: 16px 0;
+}
+
+/* ================================
+   Progress Bar
+   ================================ */
+
+.progress {
+  width: 100%;
+  height: 11px;
+  background: #e9edf5;
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: 12px;
+}
+
+.progress-bar {
+  height: 100%;
+  min-width: 0;
+  background: linear-gradient(90deg, #4169e8, #6688f5);
+  border-radius: inherit;
+  transition: width 0.35s ease;
+}
+
+/* ================================
+   Transactions
+   ================================ */
+
+.tx {
+  padding: 12px 0;
+  color: #39445a;
+  font-size: 14px;
+}
+
+.tx:first-child {
+  padding-top: 0;
+}
+
+.tx:last-child {
+  padding-bottom: 0;
+}
+
+/* ================================
+   Notice
+   ================================ */
+
+.notice {
+  margin-top: 18px;
+  padding: 16px 17px;
+  border-radius: 18px;
+  background: #edf3ff;
+  color: #53627a;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.notice b {
+  color: #3159c9;
+}
+
+/* ================================
+   Bottom Navigation
+   ================================ */
+
+#nav {
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 9px 8px calc(9px + env(safe-area-inset-bottom));
+  background: rgba(255, 255, 255, 0.96);
+  border-top: 1px solid #e3e7ee;
+  box-shadow: 0 -8px 25px rgba(23, 32, 51, 0.08);
+  backdrop-filter: blur(14px);
+}
+
+#nav button {
+  border: 0;
+  background: transparent;
+  color: #8a94a5;
+  padding: 7px 3px;
+  border-radius: 14px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+#nav button.active {
+  color: #4169e8;
+  background: #eef3ff;
+}
+
+#nav button:hover {
+  color: #4169e8;
+}
+
+/* ================================
+   Mobile
+   ================================ */
+
+@media (max-width: 480px) {
+  #screen {
+    padding: 25px 16px 120px;
+  }
+
+  h1 {
+    font-size: 34px;
+  }
+
+  h2 {
+    font-size: 28px;
+  }
+
+  .balance {
+    padding: 27px 22px;
+    border-radius: 25px;
+  }
+
+  .amount {
+    font-size: 44px;
+  }
+
+  .stat {
+    padding: 17px;
+  }
+
+  .stat b {
+    font-size: 21px;
+  }
+
+  .card {
+    border-radius: 20px;
+    padding: 17px;
+  }
+}
+
+/* ================================
+   Very Small Phones
+   ================================ */
+
+@media (max-width: 360px) {
+  .amount {
+    font-size: 38px;
+  }
+
+  .offer {
+    gap: 10px;
+  }
+
+  .icon {
+    width: 45px;
+    height: 45px;
+    font-size: 21px;
+  }
+
+  .btn {
+    padding: 11px 13px;
+    font-size: 13px;
+  }
+}
