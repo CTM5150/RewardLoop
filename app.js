@@ -470,12 +470,7 @@ function accountScreen() {
     <button class="btn full" data-action="reset">
       Reset Demo Data
     </button>
-if (action === "reset") {
-    Object.assign(state, JSON.parse(JSON.stringify(defaultState)));
-    save();
-    render();
-    alert("🔄 Demo data has been reset!");
-    return;
+
 }
     <div class="notice">
       Version 2 prototype
@@ -536,7 +531,12 @@ if (action === "reset") {
     render();
     alert("🔄 Demo data has been reset!");
     return;
-}
+}if (action === "reset") {
+    Object.assign(state, JSON.parse(JSON.stringify(defaultState)));
+    save();
+    render();
+    alert("🔄 Demo data has been reset!");
+    return;
 }
   if (action === "cashout") {
     alert("💰 Cash-out is currently a prototype feature. No real money is transferred.");
