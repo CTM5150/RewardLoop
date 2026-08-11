@@ -519,7 +519,12 @@ function handleAction(action) {
     alert("🎁 Demo activity completed! You earned 250 points.");
     return;
   }
-
+if (action === "earn") {
+    state.screen = "earn";
+    save();
+    render();
+    return;
+}
   if (action === "cashout") {
     alert("💰 Cash-out is currently a prototype feature. No real money is transferred.");
     return;
