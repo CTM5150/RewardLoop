@@ -524,6 +524,13 @@ if (action === "earn") {
     save();
     render();
     return;
+if (action === "reset") {
+    Object.assign(state, JSON.parse(JSON.stringify(defaultState)));
+    save();
+    render();
+    alert("🔄 Demo data has been reset!");
+    return;
+}
 }
   if (action === "cashout") {
     alert("💰 Cash-out is currently a prototype feature. No real money is transferred.");
