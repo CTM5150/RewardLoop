@@ -212,9 +212,9 @@ function earnScreen() {
         <span class="reward">+250 pts</span>
       </div>
 
-      <button class="btn blue" data-action="complete">
-        Start
-      </button>
+      <button class="btn blue" data-action="demo">
+    Start
+</button>
     </div>
 
     <div class="card" style="margin-top:12px;">
